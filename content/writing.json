@@ -1,1 +1,18 @@
-[]
+[
+  {
+    "slug": "building-ai-agents-infrastructure-operations",
+    "title": "Building AI Agents for Infrastructure Operations",
+    "date": "2026-05-07",
+    "platform": "LinkedIn article",
+    "url": "https://www.linkedin.com/pulse/building-ai-agents-infrastructure-operations-ram-krishnamoorthy-llfjc",
+    "summary": "Architecture patterns for infrastructure agents, including tool execution and policy checks."
+  },
+  {
+    "slug": "aiops-mission-critical",
+    "title": "AIOps in Mission-Critical Environments: What’s different when downtime is not an option",
+    "date": "2026-04-23",
+    "platform": "LinkedIn article",
+    "url": "https://www.linkedin.com/pulse/aiops-mission-critical-environments-whats-different-krishnamoorthy-wg2yc",
+    "summary": "Applying AI to bare-metal operations where physical infrastructure, precise timing, and availability shape the engineering decisions."
+  }
+]

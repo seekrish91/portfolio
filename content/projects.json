@@ -5,13 +5,191 @@
     "type": "Experiment",
     "status": "Planned",
     "summary": "When does increasing concurrency stop helping throughput and start hurting latency?",
-    "tags": ["Python", "Performance", "Model serving"],
+    "tags": [
+      "Python",
+      "Performance",
+      "Model serving"
+    ],
     "sections": [
-      {"title": "The question", "text": "More requests in flight can improve throughput. But when capacity is limited, waiting time can grow. I want to understand where that tradeoff appears and how to measure it clearly."},
-      {"title": "The first experiment", "text": "Start with a local Python simulation: 20 requests, each taking approximately 100 milliseconds, with concurrency limits of 1, 2, and 5. Predict the total duration before running the experiment, then compare it with measurements."},
-      {"title": "What to measure", "text": "Separate total run duration, per-request service time, and time spent waiting for a concurrency slot. Record the workload, configuration, errors, and sample size alongside the results."},
-      {"title": "The limitation", "text": "A fixed-delay simulation is a starting point, not a model-serving benchmark. Investigating saturation requires an explicit capacity constraint or a real bottleneck. Any later measurements will distinguish simulated workloads from real model inference."},
-      {"title": "Current status", "text": "This is an experiment brief. Implementation and measurements have not started, and no performance results are claimed."}
+      {
+        "title": "The question",
+        "text": "More requests in flight can improve throughput. But when capacity is limited, waiting time can grow. I want to understand where that tradeoff appears and how to measure it clearly."
+      },
+      {
+        "title": "The first experiment",
+        "text": "Start with a local Python simulation: 20 requests, each taking approximately 100 milliseconds, with concurrency limits of 1, 2, and 5. Predict the total duration before running the experiment, then compare it with measurements."
+      },
+      {
+        "title": "What to measure",
+        "text": "Separate total run duration, per-request service time, and time spent waiting for a concurrency slot. Record the workload, configuration, errors, and sample size alongside the results."
+      },
+      {
+        "title": "The limitation",
+        "text": "A fixed-delay simulation is a starting point, not a model-serving benchmark. Investigating saturation requires an explicit capacity constraint or a real bottleneck. Any later measurements will distinguish simulated workloads from real model inference."
+      },
+      {
+        "title": "Current status",
+        "text": "This is an experiment brief. Implementation and measurements have not started, and no performance results are claimed."
+      }
     ]
+  },
+  {
+    "slug": "aws-helpers",
+    "title": "AWS helpers",
+    "type": "Earlier project",
+    "status": "Archive · 2017",
+    "summary": "Tools for tracking EC2 resource changes and checking AWS volume status.",
+    "tags": [
+      "AWS",
+      "EC2",
+      "Infrastructure"
+    ],
+    "sections": [
+      {
+        "title": "Overview",
+        "text": "Tools for tracking EC2 resource changes and checking AWS volume status."
+      },
+      {
+        "title": "Project period",
+        "text": "June–August 2017"
+      },
+      {
+        "title": "Project record",
+        "text": "Listed on my LinkedIn profile. This archive summarizes the original project; a public code repository or live demo has not been linked here."
+      }
+    ],
+    "source": "https://www.linkedin.com/in/seetharaman-krishnamoorthy/"
+  },
+  {
+    "slug": "easy-patcher",
+    "title": "Easy Patcher",
+    "type": "Earlier project",
+    "status": "Archive · 2017",
+    "summary": "A tool for scanning and patching EC2 instances with Amazon SSM.",
+    "tags": [
+      "AWS",
+      "SSM",
+      "Patching"
+    ],
+    "sections": [
+      {
+        "title": "Overview",
+        "text": "A tool for scanning and patching EC2 instances with Amazon SSM."
+      },
+      {
+        "title": "Project period",
+        "text": "June–August 2017"
+      },
+      {
+        "title": "Project record",
+        "text": "Listed on my LinkedIn profile. This archive summarizes the original project; a public code repository or live demo has not been linked here."
+      }
+    ],
+    "source": "https://www.linkedin.com/in/seetharaman-krishnamoorthy/"
+  },
+  {
+    "slug": "security-watchdog",
+    "title": "Security Watchdog",
+    "type": "Earlier project",
+    "status": "Archive · 2017",
+    "summary": "A tool that associates vulnerable Amazon packages with affected infrastructure instances in a report.",
+    "tags": [
+      "Security",
+      "AWS",
+      "Automation"
+    ],
+    "sections": [
+      {
+        "title": "Overview",
+        "text": "A tool that associates vulnerable Amazon packages with affected infrastructure instances in a report."
+      },
+      {
+        "title": "Project period",
+        "text": "June–August 2017"
+      },
+      {
+        "title": "Project record",
+        "text": "Listed on my LinkedIn profile. This archive summarizes the original project; a public code repository or live demo has not been linked here."
+      }
+    ],
+    "source": "https://www.linkedin.com/in/seetharaman-krishnamoorthy/"
+  },
+  {
+    "slug": "gate-keeper",
+    "title": "Gate Keeper",
+    "type": "Earlier project",
+    "status": "Archive · 2017",
+    "summary": "A Chrome extension for dynamic malware analysis.",
+    "tags": [
+      "Security",
+      "Malware analysis"
+    ],
+    "sections": [
+      {
+        "title": "Overview",
+        "text": "A Chrome extension for dynamic malware analysis."
+      },
+      {
+        "title": "Project period",
+        "text": "October–December 2017"
+      },
+      {
+        "title": "Project record",
+        "text": "Listed on my LinkedIn profile. This archive summarizes the original project; a public code repository or live demo has not been linked here."
+      }
+    ],
+    "source": "https://www.linkedin.com/in/seetharaman-krishnamoorthy/"
+  },
+  {
+    "slug": "protectme",
+    "title": "ProtectMe",
+    "type": "Earlier project",
+    "status": "Archive · 2017",
+    "summary": "A Python privacy-advisor application focused on publicly available Facebook data and suggested privacy settings.",
+    "tags": [
+      "Python",
+      "Privacy"
+    ],
+    "sections": [
+      {
+        "title": "Overview",
+        "text": "A Python privacy-advisor application focused on publicly available Facebook data and suggested privacy settings."
+      },
+      {
+        "title": "Project period",
+        "text": "March–April 2017"
+      },
+      {
+        "title": "Project record",
+        "text": "Listed on my LinkedIn profile. This archive summarizes the original project; a public code repository or live demo has not been linked here."
+      }
+    ],
+    "source": "https://www.linkedin.com/in/seetharaman-krishnamoorthy/"
+  },
+  {
+    "slug": "hello-bud",
+    "title": "Hello Bud",
+    "type": "Earlier project",
+    "status": "Archive · 2017",
+    "summary": "A voice and text assistant for personalized academic and career planning.",
+    "tags": [
+      "Assistants",
+      "Academic planning"
+    ],
+    "sections": [
+      {
+        "title": "Overview",
+        "text": "A voice and text assistant for personalized academic and career planning."
+      },
+      {
+        "title": "Project period",
+        "text": "February–March 2017"
+      },
+      {
+        "title": "Project record",
+        "text": "Listed on my LinkedIn profile. This archive summarizes the original project; a public code repository or live demo has not been linked here."
+      }
+    ],
+    "source": "https://www.linkedin.com/in/seetharaman-krishnamoorthy/"
   }
 ]

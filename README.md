@@ -15,7 +15,7 @@ Open http://localhost:8765. Re-run the build after content or CSS changes. No np
 
 - About page and general page copy: `build.py`.
 - Projects: `content/projects.json`. Each record has a unique lowercase slug, title, type, status, summary, tags, and sections (title/text). Optional `repository` links to real source code. A detail page is built automatically.
-- Writing: `content/writing.json`. It is intentionally empty until Ram publishes work. Add entries with `slug`, `title`, `date` (YYYY-MM-DD), `platform`, `url` (HTTPS), `summary`, and optional `project` (an existing project slug). Entries are shown newest first.
+- Writing: `content/writing.json`. It contains two verified LinkedIn articles. Add entries with `slug`, `title`, `date` (YYYY-MM-DD), `platform`, `url` (HTTPS), `summary`, and optional `project` (an existing project slug). Entries are shown newest first.
 - Styles: `assets/style.css`.
 - Generated public files: `dist/`. Keep these tracked for Sites static deployment. Only `dist/` is public; do not put private notes there.
 
@@ -45,4 +45,4 @@ Reference patterns: [Chip Huyen](https://huyenchip.com/) for clear personal cont
 
 The existing Sites identity is retained in `.openai/hosting.json`; do not create a duplicate site. Deploy with the Sites workflow after rebuilding. Current audience is owner-private, preserved from the earlier draft. Public access must be enabled before sharing with general visitors. If moving to a custom domain, update `BASE` in `build.py` and rebuild canonical, social, and sitemap URLs.
 
-No generated content represents completed experiments, published posts, client endorsements, or measured results.
+Historical projects and published articles are sourced in CONTENT-SOURCES.md. Planned experiments remain explicitly labeled; no benchmarks or endorsements are invented.
