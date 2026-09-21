@@ -1,10 +1,10 @@
 from pathlib import Path
-import json, html, shutil
+import json, html, shutil, os
 from datetime import date
 ROOT=Path(__file__).parent
 OUT=ROOT/'dist'
 OUT.mkdir(exist_ok=True)
-BASE='https://ram-krishnamoorthy.ksraman91.chatgpt.site'
+BASE=os.environ.get('SITE_URL', 'https://ram.opscure.co').rstrip('/')
 GH='https://github.com/seekrish91'
 LI='https://www.linkedin.com/in/seetharaman-krishnamoorthy/'
 esc=html.escape

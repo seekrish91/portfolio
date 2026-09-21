@@ -45,6 +45,20 @@ Reference patterns: [Chip Huyen](https://huyenchip.com/) for clear personal cont
 
 ## Hosting
 
-The existing Sites identity is retained in `.openai/hosting.json`; do not create a duplicate site. Deploy with the Sites workflow after rebuilding. Current audience is owner-private, preserved from the earlier draft. Public access must be enabled before sharing with general visitors. If moving to a custom domain, update `BASE` in `build.py` and rebuild canonical, social, and sitemap URLs.
+Target: Vercel Hobby, with the custom domain `ram.opscure.co` and DNS managed in GoDaddy. The existing private Sites deployment remains available as a draft; `.openai/hosting.json` preserves its identity. Do not create a second Sites site or overwrite the existing Sites remote when adding a GitHub remote.
+
+Vercel reads `vercel.json`: framework Other, build command `python3 build.py`, output `dist`, no install step. This is a static site with no database or runtime functions. Python is needed only during the build.
+
+`SITE_URL` controls canonical, Open Graph, and sitemap URLs; its default is `https://ram.opscure.co`. For an update to the private Sites draft, rebuild with `SITE_URL=https://ram-krishnamoorthy.ksraman91.chatgpt.site python3 build.py`.
+
+Deployment steps:
+1. Create a dedicated GitHub repository and push this website directory only, excluding the sibling learning_plan directory.
+2. Import the repository into the existing personal Vercel Hobby account. Avoid enabling paid add-ons or trials.
+3. Deploy and verify the Vercel URL, all routes, and the 404 response.
+4. Add ram.opscure.co to the project's Domains settings.
+5. Copy the exact domain-specific CNAME target shown by Vercel into GoDaddy, for host `ram`. Do not guess the target, alter nameservers, or change Punditpit/email records.
+6. Confirm DNS verification and HTTPS issuance, then check the public site and canonical URLs.
+
+Current state: configuration prepared locally. GitHub repository creation, Vercel import/deployment, and GoDaddy DNS changes have not been performed.
 
 Historical projects and published articles are sourced in CONTENT-SOURCES.md. Planned experiments remain explicitly labeled; no benchmarks or endorsements are invented.
