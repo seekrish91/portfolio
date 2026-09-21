@@ -11,3 +11,6 @@ Updated September 21, 2026. The profile is available in search indexing but dire
 
 ## Experience update
 Ram provided his full LinkedIn Experience section directly in the conversation on September 21, 2026. content/experience.json is the canonical structured version of that supplied history. Exact titles and month/year dates supersede earlier abbreviated descriptions. Relative tenure counters are intentionally omitted to avoid staleness. Achievement summaries preserve the supplied scope; no additional latency figures, availability claims, or metrics were added. Private LinkedIn editing URLs are not published.
+
+## Education update
+Ram supplied both LinkedIn education entries directly on September 21, 2026. content/education.json records NYU (2016–2018) and Anna University Chennai (2009–2013), degree names, focus areas, and activities. No LinkedIn editing URLs are published.

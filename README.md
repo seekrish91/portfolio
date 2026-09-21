@@ -14,6 +14,7 @@ Open http://localhost:8765. Re-run the build after content or CSS changes. No np
 ## Content
 
 - About page and general page copy: `build.py`.
+- Education: `content/education.json` (institution, degree, dates, focus, activities).
 - Career history: `content/experience.json` (company, title, dates, location, summary, achievements).
 - Projects: `content/projects.json`. Each record has a unique lowercase slug, title, type, status, summary, tags, and sections (title/text). Optional `repository` links to real source code. A detail page is built automatically.
 - Writing: `content/writing.json`. It contains two verified LinkedIn articles. Add entries with `slug`, `title`, `date` (YYYY-MM-DD), `platform`, `url` (HTTPS), `summary`, and optional `project` (an existing project slug). Entries are shown newest first.

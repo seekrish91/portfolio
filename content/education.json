@@ -1,0 +1,16 @@
+[
+  {
+    "institution": "New York University",
+    "degree": "Master's degree, Computer Science",
+    "dates": "2016–2018",
+    "focus": "Concentration in cybersecurity.",
+    "activities": "Active in the Cyber Security club and a member of the OSIRIS security lab at NYU Brooklyn."
+  },
+  {
+    "institution": "Anna University Chennai",
+    "degree": "Bachelor of Technology (BTech), Information Technology",
+    "dates": "2009–2013",
+    "focus": "Focus on computer networks, with coursework spanning database management, digital signal processing, operating systems, and software engineering.",
+    "activities": "Treasurer of the Association of Information Technologists."
+  }
+]
