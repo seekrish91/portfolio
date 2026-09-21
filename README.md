@@ -19,7 +19,7 @@ Open http://localhost:8765. Re-run the build after content or CSS changes. No np
 - Projects: `content/projects.json`. Each record has a unique lowercase slug, title, type, status, summary, tags, and sections (title/text). Optional `repository` links to real source code. A detail page is built automatically.
 - Writing: `content/writing.json`. It contains two verified LinkedIn articles. Add entries with `slug`, `title`, `date` (YYYY-MM-DD), `platform`, `url` (HTTPS), `summary`, and optional `project` (an existing project slug). Entries are shown newest first.
 - Styles: `assets/style.css`.
-- Generated public files: `dist/`. Keep these tracked for Sites static deployment. Only `dist/` is public; do not put private notes there.
+- Generated public files: `dist/`. Keep these tracked for Sites static deployment. Vercel serves only `dist/`, but this GitHub repository is public. Do not put private notes or secrets anywhere in this repository.
 
 Writing entry shape (example only; not published content):
 
@@ -59,6 +59,15 @@ Deployment steps:
 5. Copy the exact domain-specific CNAME target shown by Vercel into GoDaddy, for host `ram`. Do not guess the target, alter nameservers, or change Punditpit/email records.
 6. Confirm DNS verification and HTTPS issuance, then check the public site and canonical URLs.
 
-Current state: configuration prepared locally. GitHub repository creation, Vercel import/deployment, and GoDaddy DNS changes have not been performed.
+Current state (2026-09-21):
+- Source: https://github.com/seekrish91/portfolio (public), branch `main`, local remote `github`.
+- Vercel project: https://vercel.com/seekrish91s-projects/portfolio on the existing Hobby plan.
+- Live deployment: https://portfolio-nu-khaki-59.vercel.app
+- GitHub integration is connected; pushes to `main` trigger production deployments.
+- `ram.opscure.co` is added to Vercel production. DNS is pending GoDaddy sign-in; no DNS records have been changed.
+- Required GoDaddy record: type `CNAME`, name `ram`, value `8f826b5b35a49b9c.vercel-dns-017.com` (from Vercel domain settings).
+- Verified deployment: home, projects, writing, a project detail page, stylesheet, sitemap, and robots return HTTP 200; a missing route returns HTTP 404.
+
+To publish an update, edit the source/content, run `python3 build.py`, review changes, commit, and run `git push github main`.
 
 Historical projects and published articles are sourced in CONTENT-SOURCES.md. Planned experiments remain explicitly labeled; no benchmarks or endorsements are invented.
