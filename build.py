@@ -1,0 +1,51 @@
+from pathlib import Path
+import json, html, shutil
+from datetime import date
+ROOT=Path(__file__).parent
+OUT=ROOT/'dist'
+OUT.mkdir(exist_ok=True)
+BASE='https://ram-krishnamoorthy.ksraman91.chatgpt.site'
+GH='https://github.com/seekrish91'
+LI='https://www.linkedin.com/in/seetharaman-krishnamoorthy/'
+esc=html.escape
+projects=json.loads((ROOT/'content/projects.json').read_text())
+writing=json.loads((ROOT/'content/writing.json').read_text())
+for items in [projects, writing]:
+ slugs=[x['slug'] for x in items]
+ assert len(slugs)==len(set(slugs)), 'Duplicate content slug'
+ for s in slugs:
+  assert s and all(c in 'abcdefghijklmnopqrstuvwxyz0123456789-' for c in s), 'Invalid slug'
+shutil.copy2(ROOT/'assets/style.css',OUT/'style.css')
+favicon="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%23172638'/%3E%3Cpath d='M8 24V8h8a5 5 0 0 1 0 10H8m8 0 8 6' fill='none' stroke='%23ffffff' stroke-width='3'/%3E%3C/svg%3E"
+pages=[]
+def page(path,title,desc,body,active='home',index=True):
+ nav=''.join(f'<a href="{url}"'+(' aria-current="page"' if key==active else '')+f'>{label}</a>' for key,url,label in [('home','/','About'),('projects','/projects/','Projects'),('writing','/writing/','Writing')])
+ schema=json.dumps({'@context':'https://schema.org','@type':'Person','name':'Ram Krishnamoorthy','url':BASE,'sameAs':[GH,LI],'jobTitle':'DevOps / Systems Engineer'}).replace('<','\\u003c')
+ document=f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>{esc(title)}</title><meta name="description" content="{esc(desc,quote=True)}"><meta name="theme-color" content="#172638"><link rel="canonical" href="{BASE}{path}"><meta property="og:type" content="website"><meta property="og:title" content="{esc(title,quote=True)}"><meta property="og:description" content="{esc(desc,quote=True)}"><meta property="og:url" content="{BASE}{path}"><meta name="twitter:card" content="summary"><link rel="icon" href="{favicon}"><link rel="stylesheet" href="/style.css"><script type="application/ld+json">{schema}</script></head><body><a class="skip" href="#main">Skip to content</a><div class="shell"><header><a class="identity" href="/" aria-label="Ram Krishnamoorthy home"><span class="monogram" aria-hidden="true">rk.</span><span class="full-name">Ram Krishnamoorthy</span></a><nav aria-label="Main navigation">{nav}</nav></header><main id="main">{body}</main><footer><span>© {date.today().year} Ram Krishnamoorthy</span><div><a href="{GH}">GitHub</a><a href="{LI}">LinkedIn</a></div></footer></div></body></html>'''
+ target=OUT/('404.html' if not index else path.strip('/')+'/index.html' if path!='/' else 'index.html')
+ target.parent.mkdir(parents=True,exist_ok=True);target.write_text(document)
+ if index: pages.append(path)
+def project_list():
+ return ''.join(f'''<article class="project"><span class="number" aria-hidden="true">{i:02d}</span><div><div class="meta"><span>{esc(p['type'])}</span><span class="badge">{esc(p['status'])}</span></div><h3><a href="/projects/{p['slug']}/">{esc(p['title'])}</a></h3><p>{esc(p['summary'])}</p><div class="tags">{''.join('<span>'+esc(t)+'</span>' for t in p['tags'])}</div></div></article>''' for i,p in enumerate(projects,1))
+home=f'''<section class="hero"><div><p class="eyebrow">Systems engineering · AI infrastructure</p><h1>Hi, I'm Ram.<br>I care about systems<br>that <em>hold up.</em></h1><p class="lead">I'm a DevOps and systems engineer at MEMX. I'm exploring the reliability and performance of AI systems—through small experiments, open source, and questions worth investigating.</p><div class="link-row"><a href="/projects/">Explore my work →</a><a href="{LI}">Connect on LinkedIn</a></div></div><aside class="hero-aside" aria-label="At a glance"><p><strong>Currently</strong>DevOps / Systems at MEMX</p><p><strong>Previously</strong>Tradeweb · Linux engineering</p><p><strong>Education</strong>MS Computer Science, NYU</p></aside></section><section class="section"><div class="section-head"><h2>On the workbench</h2><a href="/projects/">All projects →</a></div>{project_list()}</section><section class="section split"><div><p class="eyebrow">A little background</p><h2>From Linux systems<br>to a new set of questions.</h2><p>I've spent the past six years at MEMX working in DevOps and systems engineering. Before that, I worked at Tradeweb, earned my master's in computer science at NYU, and spent around three years as a Linux engineer in India.</p><p>Now I'm deepening my understanding of AI infrastructure: how services behave under load, how agents recover from failure, and how to tell whether a change actually helps.</p></div><ol class="timeline"><li><div><strong>MEMX</strong><span>DevOps / Systems Engineer</span></div><span class="when">Current · 6 years</span></li><li><div><strong>Tradeweb</strong><span>DevOps Engineer</span></div><span class="when">Previously</span></li><li><div><strong>New York University</strong><span>Master's in Computer Science</span></div><span class="when">Education</span></li><li><div><strong>Linux engineering · India</strong><span>Earlier engineering experience</span></div><span class="when">About 3 years</span></li></ol></section><section class="section split"><div><p class="eyebrow">Writing & field notes</p><h2>Learning, with the evidence attached.</h2></div><div><p>I'll collect technical notes and selected social posts here as the experiments develop. The aim is to explain what happened, why it matters, and what remains uncertain.</p><a href="/writing/">Visit the writing page →</a></div></section>'''
+page('/','Ram Krishnamoorthy — Systems & AI Infrastructure','DevOps and systems engineer at MEMX, exploring reliability and performance in AI infrastructure and agent systems.',home)
+questions=[('Model serving','How does concurrency affect throughput and tail latency?'),('RAG','How do stale documents or retrieval failures affect answers? Can we detect the failures?'),('Context engineering','When does extra context help, and when does it increase cost or reduce task success?'),('Agent loops','How do we bound retries, runtime, and cost? What happens after a tool failure?'),('Graph-based workflows','Can execution resume safely after a crash without repeating side effects?')]
+question_html=''.join(f'<li><strong>{esc(t)}</strong><p>{esc(q)}</p></li>' for t,q in questions)
+page('/projects/','Projects — Ram Krishnamoorthy','Experiments and open-source work exploring reliability and performance in AI systems.',f'''<div class="page-head"><p class="eyebrow">Projects & experiments</p><h1>Start with a question.<br>Follow the evidence.</h1><p class="lead">A collection of systems experiments and, as the work develops, open-source tools. Each project starts with a concrete question and makes its scope and limitations explicit.</p></div><section class="section" aria-label="Project list">{project_list()}</section><section class="section"><p class="eyebrow">Questions on my list</p><h2>Where I want to dig deeper</h2><p>These are directions for exploration, not completed projects.</p><ul class="questions">{question_html}</ul></section>''','projects')
+for p in projects:
+ sections=''.join(f'<section><h2>{esc(s["title"])}</h2><p>{esc(s["text"])}</p></section>' for s in p['sections'])
+ repo=f'<p><a href="{esc(p["repository"],quote=True)}">Source code →</a></p>' if p.get('repository') else ''
+ page('/projects/'+p['slug']+'/',p['title']+' — Ram Krishnamoorthy',p['summary'],f'''<article class="detail"><a class="back" href="/projects/">← All projects</a><div class="meta"><span>{esc(p['type'])}</span><span class="badge">{esc(p['status'])}</span></div><h1>{esc(p['title'])}</h1><p class="lead">{esc(p['summary'])}</p><div class="prose">{sections}</div>{repo}<p><a href="/writing/">Related writing and future notes →</a></p></article>''','projects')
+entries=[]
+for w in sorted(writing,key=lambda x:x['date'],reverse=True):
+ date.fromisoformat(w['date'])
+ url=w['url']; assert url.startswith('https://'), 'Writing links must use HTTPS'
+ related=f'<p><a href="/projects/{w["project"]}/">Related project →</a></p>' if w.get('project') else ''
+ if w.get('project'): assert w['project'] in [p['slug'] for p in projects], 'Unknown related project'
+ entries.append(f'<article class="project"><div class="number">{esc(w["date"])}</div><div><div class="meta">{esc(w["platform"])}</div><h2><a href="{esc(url,quote=True)}">{esc(w["title"])}</a></h2><p>{esc(w["summary"])}</p>{related}</div></article>')
+listing=''.join(entries) if entries else f'''<div class="empty"><h2>The first notes are still ahead.</h2><p>I'm beginning a series of experiments on AI reliability and performance. Published articles and selected LinkedIn posts will appear here as that work develops.</p><a href="{LI}">Find me on LinkedIn →</a></div>'''
+page('/writing/','Writing — Ram Krishnamoorthy','Technical notes and selected social posts on systems engineering, AI reliability, and performance.',f'''<div class="page-head"><p class="eyebrow">Writing</p><h1>Notes from<br>the investigation.</h1><p class="lead">What I try, what I learn, and what I still need to understand about reliable AI systems.</p></div>{listing}<section class="section split"><div><h2>Follow the work</h2><p>Interested in the experiments behind the writing?</p></div><div><p>Project pages collect the question, approach, evidence, and limitations in one place.</p><a href="/projects/">Explore the projects →</a></div></section>''','writing')
+page('/404.html','Page not found — Ram Krishnamoorthy','This page could not be found.','<div class="page-head"><p class="eyebrow">404</p><h1>This page isn’t here.</h1><p class="lead">Try the projects or writing pages, or return to the introduction.</p><div class="link-row"><a href="/">Back to About →</a></div></div>',index=False)
+(OUT/'sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'+''.join('<url><loc>'+BASE+p+'</loc></url>' for p in pages)+'</urlset>')
+(OUT/'robots.txt').write_text('User-agent: *\nAllow: /\nSitemap: '+BASE+'/sitemap.xml\n')
+print(f'Built {len(pages)} pages plus 404, sitemap, and robots.txt.')

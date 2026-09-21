@@ -1,0 +1,17 @@
+[
+  {
+    "slug": "concurrency-and-latency",
+    "title": "Concurrency, throughput & the latency tradeoff",
+    "type": "Experiment",
+    "status": "Planned",
+    "summary": "When does increasing concurrency stop helping throughput and start hurting latency?",
+    "tags": ["Python", "Performance", "Model serving"],
+    "sections": [
+      {"title": "The question", "text": "More requests in flight can improve throughput. But when capacity is limited, waiting time can grow. I want to understand where that tradeoff appears and how to measure it clearly."},
+      {"title": "The first experiment", "text": "Start with a local Python simulation: 20 requests, each taking approximately 100 milliseconds, with concurrency limits of 1, 2, and 5. Predict the total duration before running the experiment, then compare it with measurements."},
+      {"title": "What to measure", "text": "Separate total run duration, per-request service time, and time spent waiting for a concurrency slot. Record the workload, configuration, errors, and sample size alongside the results."},
+      {"title": "The limitation", "text": "A fixed-delay simulation is a starting point, not a model-serving benchmark. Investigating saturation requires an explicit capacity constraint or a real bottleneck. Any later measurements will distinguish simulated workloads from real model inference."},
+      {"title": "Current status", "text": "This is an experiment brief. Implementation and measurements have not started, and no performance results are claimed."}
+    ]
+  }
+]
