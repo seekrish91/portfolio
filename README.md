@@ -64,9 +64,10 @@ Current state (2026-09-21):
 - Vercel project: https://vercel.com/seekrish91s-projects/portfolio on the existing Hobby plan.
 - Live deployment: https://portfolio-nu-khaki-59.vercel.app
 - GitHub integration is connected; pushes to `main` trigger production deployments.
-- `ram.opscure.co` is added to Vercel production. DNS is pending GoDaddy sign-in; no DNS records have been changed.
-- Required GoDaddy record: type `CNAME`, name `ram`, value `8f826b5b35a49b9c.vercel-dns-017.com` (from Vercel domain settings).
-- Verified deployment: home, projects, writing, a project detail page, stylesheet, sitemap, and robots return HTTP 200; a missing route returns HTTP 404.
+- Primary site: https://ram.opscure.co — DNS configured by the owner in GoDaddy; Vercel reports Valid Configuration and HTTPS is verified.
+- Active GoDaddy record: type `CNAME`, name `ram`, value `8f826b5b35a49b9c.vercel-dns-017.com` (from Vercel domain settings).
+- Verified custom domain: home, projects, writing, and sitemap return HTTP 200 over HTTPS; a missing route returns HTTP 404.
+- Verified initial deployment: home, projects, writing, a project detail page, stylesheet, sitemap, and robots return HTTP 200; a missing route returns HTTP 404.
 
 To publish an update, edit the source/content, run `python3 build.py`, review changes, commit, and run `git push github main`.
 
